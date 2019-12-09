@@ -1,11 +1,18 @@
 const fs = require("fs");
 const input = fs.readFileSync("input.txt", "utf8").split("\n");
 
+const cliProgress = require("cli-progress");
+const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
+
 const path1 = input[0].split(",");
 const path2 = input[1].split(",");
 
 let path1Coords;
 let path2Coords;
+let path1CoordsString = [];
+
+let bar = 0;
+let intersections = [];
 
 trackCoords = (path, pathCoords) => {
   pathCoords = [[0, 0]];
@@ -39,24 +46,27 @@ trackCoords = (path, pathCoords) => {
         console.log(`Error`);
     }
   });
-  // console.log(`path coordinated... ${pathCoords[0]}`);
-
   return pathCoords;
 };
 
-// console.log(trackCoords(path1, path1Coords));
 path1Coords = trackCoords(path1, path1Coords);
 path2Coords = trackCoords(path2, path2Coords);
 
-console.log(JSON.stringify(path1Coords[1])===JSON.stringify(path2Coords[0]))
-for (let i = 0; i < path1Coords.length; i++) {
-  for (let j = 0; j < path2Coords.length; j++) {
-    if (JSON.stringify(path1Coords[i])===JSON.stringify(path2Coords[j])){
-      console.log(JSON.stringify(path1Coords[i]));
-    }
-  }
-}
+path1Coords.forEach(coord => {
+  path1CoordsString.push(JSON.stringify(coord));
+});
 
-// store them in an array
-// transfer coordiate array to distance arr with added abs val
-// sort from least and output arr[0]
+bar1.start(path2Coords.length, 0);
+path2Coords.forEach(coord => {
+  bar1.update(bar++);
+
+  if (path1CoordsString.includes(JSON.stringify(coord))) {
+    intersections.push({ coord: coord, distance: coord[0] + coord[1] });
+  }
+});
+bar1.stop();
+
+intersections.sort((a, b) =>
+  a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0
+);
+console.log(`====================\nNearest instersection:\n${JSON.stringify(intersections[1])}\n====================`);
