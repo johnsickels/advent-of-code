@@ -13,7 +13,11 @@ passwordValidator = (a, b) => {
       if (iArr[j] > iArr[j + 1]) {
         incrementing = false;
       }
-      if (iArr[j] === iArr[j + 1]) {
+      if (
+        iArr[j] === iArr[j + 1] &&
+        iArr[j + 1] !== iArr[j + 2] &&
+        iArr[j] !== iArr[j - 1]
+      ) {
         containsDups = true;
       }
     }
