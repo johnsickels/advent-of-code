@@ -4,9 +4,8 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --ext .json --ext .md",
-    "pretest": "npm run lint",
-    "test": "echo \"No tests\""
+    "test": "jest",
+    "lint": "eslint **/*.js **/*.mjs"
   },
   "repository": {
     "type": "git",
