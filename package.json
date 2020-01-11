@@ -4,7 +4,7 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "echo 'No tests found'",
     "lint": "eslint **/*.js **/*.mjs"
   },
   "repository": {
