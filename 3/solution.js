@@ -24,28 +24,28 @@ trackCoords = (path, pathCoords) => {
     let steps = parseInt(element.slice(1));
 
     switch (element[0]) {
-      case "U":
-        for (let i = y + 1; i < y + steps + 1; i++) {
-          pathCoords.push({ coords: [x, i], totalSteps: ++totalSteps });
-        }
-        break;
-      case "R":
-        for (let i = x + 1; i < x + steps + 1; i++) {
-          pathCoords.push({ coords: [i, y], totalSteps: ++totalSteps });
-        }
-        break;
-      case "D":
-        for (let i = y - 1; i > y - steps - 1; i--) {
-          pathCoords.push({ coords: [x, i], totalSteps: ++totalSteps });
-        }
-        break;
-      case "L":
-        for (let i = x - 1; i > x - steps - 1; i--) {
-          pathCoords.push({ coords: [i, y], totalSteps: ++totalSteps });
-        }
-        break;
-      default:
-        console.log(`Error`);
+    case "U":
+      for (let i = y + 1; i < y + steps + 1; i++) {
+        pathCoords.push({ coords: [x, i], totalSteps: ++totalSteps });
+      }
+      break;
+    case "R":
+      for (let i = x + 1; i < x + steps + 1; i++) {
+        pathCoords.push({ coords: [i, y], totalSteps: ++totalSteps });
+      }
+      break;
+    case "D":
+      for (let i = y - 1; i > y - steps - 1; i--) {
+        pathCoords.push({ coords: [x, i], totalSteps: ++totalSteps });
+      }
+      break;
+    case "L":
+      for (let i = x - 1; i > x - steps - 1; i--) {
+        pathCoords.push({ coords: [i, y], totalSteps: ++totalSteps });
+      }
+      break;
+    default:
+      console.log("Error");
     }
   });
   return pathCoords;
@@ -82,10 +82,10 @@ shortestDistance = () => {
     a.distance > b.distance ? 1 : b.distance > a.distance ? -1 : 0
   );
   console.log(
-  `====================\n SHORTEST DISTANCE:\n
+    `====================\n SHORTEST DISTANCE:\n
     ${JSON.stringify(intersections[1].distance)}\n
   ====================`
-);
+  );
 };
 
 // ===== PART TWO ===== //
@@ -94,14 +94,14 @@ leastSteps = () => {
     a.bothTotalSteps > b.bothTotalSteps
       ? 1
       : b.bothTotalSteps > a.bothTotalSteps
-      ? -1
-      : 0
+        ? -1
+        : 0
   );
   console.log(
-  `====================\nLEAST STEPS:\n
+    `====================\nLEAST STEPS:\n
     ${JSON.stringify(intersections[1].bothTotalSteps)}\n
     ====================`
-);
+  );
 };
 
 shortestDistance();
