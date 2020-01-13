@@ -18,17 +18,17 @@ for (i = 0; i < arr.length; i += 4) {
   let store = arr[i + 3];
 
   switch (opcode) {
-  case 1:
-    arr[store] = arr[x] + arr[y];
-    break;
-  case 2:
-    arr[store] = arr[x] * arr[y];
-    break;
-  case 99:
-    console.log(arr[0]);
-    return;
-  default:
-    console.log("error occured: invalid opcode");
+    case 1:
+      arr[store] = arr[x] + arr[y];
+      break;
+    case 2:
+      arr[store] = arr[x] * arr[y];
+      break;
+    case 99:
+      console.log(arr[0]);
+      return;
+    default:
+      console.log("error occured: invalid opcode");
   }
 }
 /* Looking for output 19690720

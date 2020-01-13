@@ -15,78 +15,78 @@ intcode = input => {
     let opcode = arr[i];
 
     switch (opcode.toString().length) {
-    case 1:
-      param1 = arr[arr[i + 1]];
-      param2 = arr[arr[i + 2]];
-      break;
-    case 2:
-      break;
-    case 3:
-      param1 = arr[i + 1];
-      param2 = arr[arr[i + 2]];
-      opcode = Number(opcode.toString().split("")[2]);
-      break;
-    case 4:
-      param1 =
+      case 1:
+        param1 = arr[arr[i + 1]];
+        param2 = arr[arr[i + 2]];
+        break;
+      case 2:
+        break;
+      case 3:
+        param1 = arr[i + 1];
+        param2 = arr[arr[i + 2]];
+        opcode = Number(opcode.toString().split("")[2]);
+        break;
+      case 4:
+        param1 =
           opcode.toString().split("")[1] === "1" ? arr[i + 1] : arr[arr[i + 1]];
-      param2 = arr[i + 2];
-      opcode = Number(opcode.toString().split("")[3]);
-      break;
-    default:
-      console.log(`Error: Invalid OPCODE ${opcode}`);
+        param2 = arr[i + 2];
+        opcode = Number(opcode.toString().split("")[3]);
+        break;
+      default:
+        console.log(`Error: Invalid OPCODE ${opcode}`);
     }
     switch (opcode) {
-    case 1:
-      arr[arr[i + 3]] = param1 + param2;
-      i += 4;
-      break;
-    case 2:
-      arr[arr[i + 3]] = param1 * param2;
-      i += 4;
-      break;
-    case 3:
-      arr[arr[i + 1]] = input;
-      i += 2;
-      break;
-    case 4:
-      console.log(`Position ${i} output ${param1}`);
-      i += 2;
-      break;
-    case 5:
-      if (param1 !== 0) {
-        i = param2;
-      } else {
-        i += 3;
-      }
-      break;
-    case 6:
-      if (param1 === 0) {
-        i = param2;
-      } else {
-        i += 3;
-      }
-      break;
-    case 7:
-      if (param1 < param2) {
-        arr[arr[i + 3]] = 1;
-      } else {
-        arr[arr[i + 3]] = 0;
-      }
-      i += 4;
-      break;
-    case 8:
-      if (param1 === param2) {
-        arr[arr[i + 3]] = 1;
-      } else {
-        arr[arr[i + 3]] = 0;
-      }
-      i += 4;
-      break;
-    case 99:
-      console.log("HALT");
-      return;
-    default:
-      console.log(`error occured: invalid opcode ${opcode} at position ${i}`);
+      case 1:
+        arr[arr[i + 3]] = param1 + param2;
+        i += 4;
+        break;
+      case 2:
+        arr[arr[i + 3]] = param1 * param2;
+        i += 4;
+        break;
+      case 3:
+        arr[arr[i + 1]] = input;
+        i += 2;
+        break;
+      case 4:
+        console.log(`Position ${i} output ${param1}`);
+        i += 2;
+        break;
+      case 5:
+        if (param1 !== 0) {
+          i = param2;
+        } else {
+          i += 3;
+        }
+        break;
+      case 6:
+        if (param1 === 0) {
+          i = param2;
+        } else {
+          i += 3;
+        }
+        break;
+      case 7:
+        if (param1 < param2) {
+          arr[arr[i + 3]] = 1;
+        } else {
+          arr[arr[i + 3]] = 0;
+        }
+        i += 4;
+        break;
+      case 8:
+        if (param1 === param2) {
+          arr[arr[i + 3]] = 1;
+        } else {
+          arr[arr[i + 3]] = 0;
+        }
+        i += 4;
+        break;
+      case 99:
+        console.log("HALT");
+        return;
+      default:
+        console.log(`error occured: invalid opcode ${opcode} at position ${i}`);
     }
   }
 };
