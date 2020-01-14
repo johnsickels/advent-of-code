@@ -4,7 +4,7 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'No tests found'",
+    "test": "mocha",
     "lint": "eslint **/*.js"
   },
   "repository": {
@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/johnsickels/advent-of-code#readme",
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-json": "^2.0.1",
-    "eslint-plugin-markdown": "^1.0.1"
+    "eslint-plugin-markdown": "^1.0.1",
+    "mocha": "^7.0.0"
   }
 }
