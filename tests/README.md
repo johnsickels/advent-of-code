@@ -1,0 +1,30 @@
+# Flagpole TODO
+
+- [x] Athletes List
+  - /athletes
+- [x] Athlete Profile
+  - /athletes/{athleteId}
+- [x] Teams List
+  - /teams
+  - /teams?q=state
+- [\] Team Profile
+  - /teams/{teamId}
+- [x] Articles List
+  - /articles
+- [x] Article
+  - /articles/{articleId}
+- [x] Video Links
+  - /videos
+- [x] Video
+  - /videos/{videoId}
+- [x] Meet
+  - /meets/{meetId}
+- [x] Rankings
+  - /rankings
+  - /rankings/events/high-school-boys/indoor-track-and-field/55m (authorization)
+- [x] Front Page
+  - /
+- [x] Results
+  - /results
+- [x] Calendar
+  - /calendar
