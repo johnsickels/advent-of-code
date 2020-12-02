@@ -4,6 +4,7 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
+    "build": "cd 2020 && tsc",
     "test": "jest",
     "lint": "eslint **/*.js"
   },

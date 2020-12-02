@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - 8.5.0
 script:
-  - "tsc"
+  - "npm run build"
   - "npm run lint"
   - "npm run test"
