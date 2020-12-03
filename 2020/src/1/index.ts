@@ -1,4 +1,4 @@
-import { inputToArray } from "../utils";
+// import { inputToArray } from "../utils";
 
 const partOne = (array: number[]): number => {
   for (let i = 0; i < array.length; i++) {

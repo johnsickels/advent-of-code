@@ -1,8 +1,12 @@
-import { inputToArray } from "../utils";
+// import { inputToArray } from "../utils";
 
-const rows = inputToArray("3.txt");
+// const rows = inputToArray("3.txt");
 
-export const treeCounter = (array: string[], right: number, down: number) => {
+export const treeCounter = (
+  array: string[],
+  right: number,
+  down: number
+): number => {
   let x = 0;
   let y = 0;
   let trees = 0;
@@ -11,7 +15,7 @@ export const treeCounter = (array: string[], right: number, down: number) => {
     x += right;
     x = x % array[y].length;
     y += down;
-    let pos = array[y][x];
+    const pos = array[y][x];
 
     if (pos === "#") {
       trees++;
@@ -20,7 +24,10 @@ export const treeCounter = (array: string[], right: number, down: number) => {
   return trees;
 };
 
-export const slopeTreeProduct = (rows: string[], slopes: number[][]) => {
+export const slopeTreeProduct = (
+  rows: string[],
+  slopes: number[][]
+): number => {
   return slopes.reduce((acc, cur) => {
     return acc * treeCounter(rows, cur[0], cur[1]);
   }, 1);

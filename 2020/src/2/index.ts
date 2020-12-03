@@ -1,8 +1,10 @@
-import { inputToArray } from "../utils";
+// import { inputToArray } from "../utils";
 
-const entries = inputToArray("2.txt");
+// const entries = inputToArray("2.txt");
 
-export const countValidPasswords = (array: string[]) => {
+type answer = { partOne: number; partTwo: number };
+
+export const countValidPasswords = (array: string[]): answer => {
   let partOne = 0;
   let partTwo = 0;
   for (let i = 0; i < array.length; i++) {
