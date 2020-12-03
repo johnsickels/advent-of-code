@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd 2020 && tsc",
+    "build:watch": "cd 2020 && tsc --watch",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test": "jest",
     "lint": "eslint . --ext .ts"

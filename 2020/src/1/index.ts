@@ -1,7 +1,4 @@
-import * as fs from "fs";
-
-const data = fs.readFileSync("./2020/inputs/1.txt", "utf8");
-const entries = data.split("\n").map((s) => parseInt(s));
+import { inputToArray } from "../utils";
 
 const partOne = (array: number[]): number => {
   for (let i = 0; i < array.length; i++) {
@@ -13,7 +10,7 @@ const partOne = (array: number[]): number => {
   }
 };
 
-// console.log(partOne(entries));
+// console.log(partOne(inputToArray("1.txt").map((e) => parseInt(e))));
 
 const partTwo = (array: number[]): number => {
   for (let i = 0; i < array.length; i++) {
@@ -27,7 +24,7 @@ const partTwo = (array: number[]): number => {
   }
 };
 
-// console.log(partTwo(entries));
+// console.log(partTwo(inputToArray("1.txt").map((e) => parseInt(e))));
 
 module.exports = {
   partOne: partOne,
