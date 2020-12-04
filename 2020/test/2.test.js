@@ -1,6 +1,7 @@
 const { countValidPasswords } = require("../dist/2");
+const { inputToArray } = require("../dist/utils");
 
-test("counts the number of valid passwords, part one", () => {
+test("counts the number of sample valid passwords, part one", () => {
   expect(
     countValidPasswords(["1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"])
       .partOne
@@ -18,7 +19,13 @@ test("counts the number of valid passwords, part one", () => {
   ).toBe(3);
 });
 
-test("counts the number of valid passwords, part two", () => {
+test("counts the number of actual valid passwords, part one", () => {
+  expect(countValidPasswords(inputToArray("../inputs/2.txt")).partOne).toBe(
+    600
+  );
+});
+
+test("counts the number of sample valid passwords, part two", () => {
   expect(
     countValidPasswords(["1-3 a: abcde", "1-3 b: cdefg", "2-9 c: ccccccccc"])
       .partTwo
@@ -38,4 +45,10 @@ test("counts the number of valid passwords, part two", () => {
     countValidPasswords(["1-2 a: abcde", "1-3 b: bdcfg", "2-4 c: cccdccccc"])
       .partTwo
   ).toBe(3);
+});
+
+test("counts the number of actual valid passwords, part two", () => {
+  expect(countValidPasswords(inputToArray("../inputs/2.txt")).partTwo).toBe(
+    245
+  );
 });
