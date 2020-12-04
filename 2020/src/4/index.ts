@@ -86,9 +86,7 @@ export const strictValidPassportCounter = (passports: Passport[]): number => {
     if (passport["hcl"] === undefined) return false;
     if (passport["hcl"][0] !== "#") return false;
     const validHCL = /^[a-f0-9]{6}$/;
-    if (!validHCL.test(passport["hcl"].slice(1))) {
-      return false;
-    }
+    if (!validHCL.test(passport["hcl"].slice(1))) return false;
 
     // ecl (Eye Color) - exactly one of: amb blu brn gry grn hzl oth.
     const eclOptions = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"];
