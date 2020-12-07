@@ -1,16 +1,11 @@
-import * as fs from "fs";
-import * as path from "path";
+import { inputToArray } from "../utils"
 
 interface Passport {
   [key: string]: string;
 }
 
 export const inputToPassportObjects = (file: string): Passport[] => {
-  const INPUT_DIR = path.resolve(__dirname, "../../inputs");
-  const inputPath = path.join(INPUT_DIR, file);
-  const data = fs.readFileSync(inputPath, "utf8");
-  const rawPassports = data.split("\n\n");
-  const passportObjects = rawPassports.map((rawPassport) => {
+  const passportObjects = inputToArray(file, 2).map((rawPassport) => {
     const stringPassport = rawPassport.split("\n").join(" ");
     const arrayPassport = stringPassport.split(" ");
     const passportObject: Passport = {};
