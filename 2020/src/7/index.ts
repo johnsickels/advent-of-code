@@ -22,10 +22,12 @@ const bagRuleStringToObject = (ruleStrings: string[]): bagRuleGroup => {
 
     let i = 4;
     while (i < substr.length) {
-      (bagRuleObject[key][camelize(substr[i + 1], substr[i + 2])] = parseInt(
-        substr[i]
-      )),
-        (i += 4);
+      if (parseInt(substr[i])) {
+        bagRuleObject[key][camelize(substr[i + 1], substr[i + 2])] = parseInt(
+          substr[i]
+        );
+      }
+      i += 4;
     }
   });
   return bagRuleObject;
@@ -49,4 +51,22 @@ export const countBagsThatCanHoldMyBag = (ruleStrings: string[]): number => {
   return bags.length - 1;
 };
 
-// console.log(countBagsThatCanHoldMyBag(bagRuleStrings));
+export const countBagsInMyBag = (ruleStrings: string[]): number => {
+  let bagsInside = 0;
+  const bagRuleObject = bagRuleStringToObject(ruleStrings);
+
+  const addBags = (bagObj: bagRule, multiplier: number) => {
+    Object.entries(bagObj).forEach(([bagColor, numberOfBags]) => {
+      bagsInside += numberOfBags * multiplier;
+      if (Object.keys(bagRuleObject[bagColor]).length) {
+        addBags(bagRuleObject[bagColor], numberOfBags * multiplier);
+      }
+    });
+  };
+
+  addBags(bagRuleObject[myBag], 1);
+  return bagsInside;
+};
+
+// console.log("Part one:", countBagsThatCanHoldMyBag(bagRuleStrings));
+// console.log("Part two:", countBagsInMyBag(bagRuleStrings));
