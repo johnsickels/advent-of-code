@@ -1,17 +1,38 @@
 // import { inputToArray } from "../utils";
 // const instructions = inputToArray("8.txt");
 
-export const findAccumulatorAtInfiniteLoop = (input: string[]): number => {
+interface handheldOutput {
+  accumulator: number;
+  isInfinite: boolean;
+}
+
+export const findAccumulatorAtInfiniteLoop = (
+  input: string[],
+  positionOfOperationToChange?: number
+): handheldOutput => {
   let accumulator = 0;
   let position = 0;
   const positionHistory: number[] = [];
 
   do {
     const instruction = input[position].split(" ");
-    const operation = instruction[0];
+    let operation = instruction[0];
     const argument = parseInt(instruction[1]);
 
     positionHistory.push(position);
+
+    if (positionOfOperationToChange === position) {
+      switch (operation) {
+        case "nop":
+          operation = "jmp";
+          break;
+        case "jmp":
+          operation = "nop";
+          break;
+        default:
+          break;
+      }
+    }
 
     switch (operation) {
       case "acc":
@@ -31,8 +52,19 @@ export const findAccumulatorAtInfiniteLoop = (input: string[]): number => {
         );
         break;
     }
-  } while (!positionHistory.includes(position));
-  return accumulator;
+  } while (!positionHistory.includes(position) && position < input.length);
+  const isInfinite = positionHistory.includes(position);
+  return { accumulator: accumulator, isInfinite: isInfinite };
+};
+
+export const findAccumulatorAtFixedProgram = (input: string[]): number => {
+  for (let i = 0; i < input.length; i++) {
+    const results = findAccumulatorAtInfiniteLoop(input, i);
+    if (results.isInfinite === false) {
+      return results.accumulator;
+    }
+  }
 };
 
 // console.log(findAccumulatorAtInfiniteLoop(instructions));
+// console.log(findAccumulatorAtFixedProgram(instructions));
