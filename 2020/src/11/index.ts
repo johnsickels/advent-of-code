@@ -1,5 +1,5 @@
-import { inputToArray } from "../utils";
-const floorPlan = inputToArray("11.txt").map(row => row.split(""))
+// import { inputToArray } from "../utils";
+// const floorPlan = inputToArray("11.txt").map(row => row.split(""))
 
 const countOccupiedSeats = (plan: string[][]): number => {
     let occupiedSeats = 0
@@ -49,4 +49,4 @@ export const sitDown = (data: string[][]): number => {
     return sitDown(newFloorPlan)
 }
 
-console.log(sitDown(floorPlan))
+// console.log(sitDown(floorPlan))
