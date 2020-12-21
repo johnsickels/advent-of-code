@@ -6,7 +6,7 @@ export const findNthNumber = (input: number[], target: number): number => {
     const lastIndex = input.lastIndexOf(lastSpoken);
 
     if (lastIndex !== -1) {
-      let difference = i - lastIndex;
+      const difference = i - lastIndex;
       input.push(lastSpoken, difference);
     } else {
       input.push(lastSpoken, 0);
