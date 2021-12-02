@@ -8,8 +8,7 @@
     "build-2020": "cd 2020 && tsc",
     "build-2021": "cd 2021 && tsc",
     "watch": "cd 2021 && tsc --watch",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint . --ext .ts"
   },
   "repository": {
