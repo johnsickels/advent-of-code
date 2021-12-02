@@ -4,7 +4,7 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
-    "build": "concurrently \"npm:build:2020\" \"npm:build:2021\"",
+    "build": "concurrently \"npm:build:*\"",
     "build:2020": "cd 2020 && tsc",
     "build:2021": "cd 2021 && tsc",
     "build:watch": "cd 2021 && tsc --watch",
