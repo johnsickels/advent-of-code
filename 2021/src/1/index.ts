@@ -27,7 +27,6 @@ export const partTwo = (array: number[]): number => {
 
     const threeSum = n1 + n2 + n3
 
-    console.log({threeSum, lastMeasurement});
     if (lastMeasurement && threeSum > lastMeasurement){
       
       largerMeasurements++
