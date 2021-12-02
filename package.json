@@ -4,10 +4,10 @@
   "description": "Advent of Code 2019",
   "main": "index.js",
   "scripts": {
-    "build": "concurrently \"npm:build:*\"",
-    "build:2020": "cd 2020 && tsc",
-    "build:2021": "cd 2021 && tsc",
-    "build:watch": "cd 2021 && tsc --watch",
+    "build": "concurrently \"npm:build-*\"",
+    "build-2020": "cd 2020 && tsc",
+    "build-2021": "cd 2021 && tsc",
+    "watch": "cd 2021 && tsc --watch",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "test": "jest",
     "lint": "eslint . --ext .ts"
