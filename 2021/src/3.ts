@@ -1,4 +1,4 @@
-import { inputToArray } from "./utils";
+// import { inputToArray } from "./utils";
 
 export const partOne = (array: string[]): number => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,4 +67,4 @@ export const partTwo = (array: string[]): number => {
   return getRating(array, "oxygen") * getRating(array, "CO2");
 };
 
-console.log(partTwo(inputToArray("3.txt")));
+// console.log(partTwo(inputToArray("3.txt")));
