@@ -1,4 +1,4 @@
-const { partOne, partTwo } = require("../dist/1/index.js");
+const { partOne, partTwo } = require("../dist/1.js");
 const { inputToArray } = require("../dist/utils");
 
 test("finds the measurements larger than the previous measurement", () => {

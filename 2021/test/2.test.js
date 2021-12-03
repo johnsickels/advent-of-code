@@ -1,4 +1,4 @@
-const { partOne, partTwo } = require("../dist/2/index.js");
+const { partOne, partTwo } = require("../dist/2.js");
 const { inputToArray } = require("../dist/utils");
 
 test("finds product of the horizontal position and depth you would have after following the planned course", () => {
