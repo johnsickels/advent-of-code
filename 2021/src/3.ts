@@ -30,14 +30,13 @@ export const partOne = (array: string[]): number => {
 // console.log(partOne(inputToArray("3.txt")));
 
 const getRating = (array: string[], ratingType: string, col = 0): number => {
-
   if (array.length === 1) {
     return parseInt(array[0], 2);
   }
 
   const zeroStarting = [];
   const oneStarting = [];
-  
+
   for (let j = 0; j < array.length; j++) {
     const bit = array[j][col];
     if (bit === "0") {
@@ -47,20 +46,14 @@ const getRating = (array: string[], ratingType: string, col = 0): number => {
     }
   }
 
-  if (ratingType === "oxygen") {
-    if (oneStarting.length >= zeroStarting.length) {
-      return getRating(oneStarting, ratingType, ++col);
-    } else {
-      return getRating(zeroStarting, ratingType, ++col);
-    }
-  }
-  if (ratingType === "CO2") {
-    if (oneStarting.length >= zeroStarting.length) {
-      return getRating(zeroStarting, ratingType, ++col);
-    } else {
-      return getRating(oneStarting, ratingType, ++col);
-    }
-  }
+  const moreOnes = oneStarting.length >= zeroStarting.length;
+
+  const arrToPass =
+    (ratingType === "oxygen" && moreOnes) || (ratingType === "CO2" && !moreOnes)
+      ? oneStarting
+      : zeroStarting;
+
+  return getRating(arrToPass, ratingType, ++col);
 };
 
 export const partTwo = (array: string[]): number => {
