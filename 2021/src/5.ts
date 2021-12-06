@@ -1,6 +1,10 @@
 // import { inputToArray } from "./utils";
 
-export const partOne = (array: string[], size: number): number => {
+export const main = (
+  array: string[],
+  size: number,
+  diagonals = false
+): number => {
   // parse
   const coords = array.map((line) => {
     const lineArr = line
@@ -31,6 +35,55 @@ export const partOne = (array: string[], size: number): number => {
         diagram[y][x]++;
       }
     }
+
+    // draw diagonal lines
+    if (diagonals) {
+      const lineLen = Math.abs(x1 - x2);
+      if (x1 > x2 && y1 > y2) {
+        let i = 0;
+        let x = x1;
+        let y = y1;
+        while (i <= lineLen) {
+          diagram[y][x]++;
+          i++;
+          x--;
+          y--;
+        }
+      }
+      if (x1 > x2 && y1 < y2) {
+        let i = 0;
+        let x = x1;
+        let y = y1;
+        while (i <= lineLen) {
+          diagram[y][x]++;
+          i++;
+          x--;
+          y++;
+        }
+      }
+      if (x1 < x2 && y1 > y2) {
+        let i = 0;
+        let x = x1;
+        let y = y1;
+        while (i <= lineLen) {
+          diagram[y][x]++;
+          i++;
+          x++;
+          y--;
+        }
+      }
+      if (x1 < x2 && y1 < y2) {
+        let i = 0;
+        let x = x1;
+        let y = y1;
+        while (i <= lineLen) {
+          diagram[y][x]++;
+          i++;
+          x++;
+          y++;
+        }
+      }
+    }
   });
 
   // flatten 2d array
@@ -50,4 +103,5 @@ export const partOne = (array: string[], size: number): number => {
   return overlaps;
 };
 
-// console.log(partOne(inputToArray("5.txt"), 1000));
+// console.log(main(inputToArray("5.test.txt"), 10, true));
+// console.log(main(inputToArray("5.txt"), 1000, true));
