@@ -12,3 +12,14 @@ test("finds the lanternfish population", () => {
     )
   ).toBe(350149);
 });
+
+// takes to long, I'm not good at math to do better
+// test("finds the lanternfish population over a long time", () => {
+//   expect(partOne(sample, 256)).toBe(26984457539);
+//   expect(
+//     partOne(
+//       inputToArray("6.txt", 1, ",").map((num) => parseInt(num)),
+//       80
+//     )
+//   ).toBe(1590327954513);
+// });

@@ -1,5 +1,3 @@
-// import { inputToArray } from "./utils";
-
 export const partOne = (
   array: number[],
   days: number,
@@ -20,9 +18,23 @@ export const partOne = (
   return partOne(array.concat(Array(newborns).fill(8)), days, ++currentDay);
 };
 
-// console.log(
-//   partOne(
-//     inputToArray("6.txt", 1, ",").map((num) => parseInt(num)),
-//     80
-//   )
-// );
+const regenerate = (fishAge: number, daysLeft: number): number => {
+  daysLeft = daysLeft - fishAge - 1;
+  return daysLeft < 0 ? 1 : regenerate(6, daysLeft) + regenerate(8, daysLeft);
+};
+
+export const partTwo = (arr: number[], days: number): number => {
+  let population = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const obj: { [key: string]: number } = {};
+
+  for (const fish of arr) {
+    obj[fish] = ++obj[fish] || 1;
+  }
+
+  for (const [fishAge, frequency] of Object.entries(obj)) {
+    population += regenerate(parseInt(fishAge), days) * frequency;
+  }
+
+  return population;
+};
