@@ -63,13 +63,4 @@ const findFuelTotalSpend = (
 };
 
 // find fuel spend in sport mode 5 + 4 + 3 + 2 + 1
-const findFuelSpend = (spacesToTravel: number): number => {
-  let spacesTraveled = 0;
-  let fuel = 0;
-  while (spacesToTravel) {
-    spacesTraveled++;
-    fuel += spacesTraveled;
-    spacesToTravel--;
-  }
-  return fuel;
-};
+const findFuelSpend = (n: number): number => (n * (n + 1)) / 2;
