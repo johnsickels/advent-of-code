@@ -32,18 +32,28 @@ const findByLength = (array: string[], len: number) => {
     .join("");
 };
 
+/**
+ *
+ * @param array signal patterns
+ * @param key numbers figured out so far
+ * @param conditions find signal pattern with this length that matches the comparison
+ * @returns
+ */
 const findByCommonality = (
   array: string[],
   key: Key,
-  len: number,
-  comparison: number,
-  matches: number
+  conditions: {
+    len: number;
+    comparison: number;
+    matches: number;
+  }
 ) => {
   return array
     .find((signal, i) => {
       if (
-        signal.length === len &&
-        getCommonChars(signal, getKeyByValue(key, comparison)) == matches
+        signal.length === conditions.len &&
+        getCommonChars(signal, getKeyByValue(key, conditions.comparison)) ==
+          conditions.matches
       ) {
         array.splice(i, 1);
         return true;
@@ -79,19 +89,49 @@ export const partTwo = (array: string[]): number => {
     key[findByLength(currentLine.signalPatterns, 7)] = 8;
 
     // length 5 with both digits from 1 is 3
-    key[findByCommonality(currentLine.signalPatterns, key, 5, 1, 2)] = 3;
+    key[
+      findByCommonality(currentLine.signalPatterns, key, {
+        len: 5,
+        comparison: 1,
+        matches: 2,
+      })
+    ] = 3;
 
     // length 5 with 3 in common with 4 is 5
-    key[findByCommonality(currentLine.signalPatterns, key, 5, 4, 3)] = 5;
+    key[
+      findByCommonality(currentLine.signalPatterns, key, {
+        len: 5,
+        comparison: 4,
+        matches: 3,
+      })
+    ] = 5;
 
     // length 5 with 2 in common with 4 is 2
-    key[findByCommonality(currentLine.signalPatterns, key, 5, 4, 2)] = 2;
+    key[
+      findByCommonality(currentLine.signalPatterns, key, {
+        len: 5,
+        comparison: 4,
+        matches: 2,
+      })
+    ] = 2;
 
     // length 6 with 4 in common with 4 is 9
-    key[findByCommonality(currentLine.signalPatterns, key, 6, 4, 4)] = 9;
+    key[
+      findByCommonality(currentLine.signalPatterns, key, {
+        len: 6,
+        comparison: 4,
+        matches: 4,
+      })
+    ] = 9;
 
     // length 6 with 1 in common with 1 is 6
-    key[findByCommonality(currentLine.signalPatterns, key, 6, 1, 1)] = 6;
+    key[
+      findByCommonality(currentLine.signalPatterns, key, {
+        len: 6,
+        comparison: 1,
+        matches: 1,
+      })
+    ] = 6;
 
     // zero is the only one left
     const lastSignalPattern = currentLine.signalPatterns[0]
@@ -112,7 +152,7 @@ export const partTwo = (array: string[]): number => {
       },
       ""
     );
-    
+
     return parseInt(sum) + accumulatingTotalSum;
   }, 0);
 };
