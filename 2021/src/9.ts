@@ -1,17 +1,29 @@
-import { inputToArray } from "./utils";
+interface Point {
+  riskLevel: number;
+  visited: boolean;
+}
 
-const findLowestFromPoint = (x: number, y: number, map: number[][]): string => {
-  const val = map[y][x];
-  const up = map[y + 1] && map[y + 1][x];
-  const down = map[y - 1] && map[y - 1][x];
-  const right = map[y][x + 1];
-  const left = map[y][x - 1];
+interface LowPoint {
+  x: number;
+  y: number;
+  val: number;
+}
 
-  //   console.log({ x, y, val });
+const findLowestFromPoint = (
+  x: number,
+  y: number,
+  map: Point[][]
+): LowPoint => {
+  // don't retrace steps
+  if (map[y][x].visited) return;
+  map[y][x].visited = true;
 
-//   if (!up || !down || !left || !right) return;
-//   if ((val === up) && (val === down)&&(val === left)&&(val === right)) return;
-  //   if()
+  // gather comparison values
+  const val = map[y][x].riskLevel;
+  const up = map[y + 1] && map[y + 1][x] && map[y + 1][x].riskLevel;
+  const down = map[y - 1] && map[y - 1][x] && map[y - 1][x].riskLevel;
+  const right = map[y][x + 1] && map[y][x + 1].riskLevel;
+  const left = map[y][x - 1] && map[y][x - 1].riskLevel;
 
   // check up and down
   if (down < val) {
@@ -28,35 +40,39 @@ const findLowestFromPoint = (x: number, y: number, map: number[][]): string => {
     return findLowestFromPoint(x + 1, y, map);
   }
 
-  //   if(val === )
+  // disregard wall points
+  const validPositions = [val, up, down, left, right].filter((pos) =>
+    Number.isInteger(pos)
+  );
 
-  console.log("low point", { x, y, val });
+  // if all equal, we are on a plateau
+  if (validPositions.every((p) => validPositions[0] === p)) {
+    return;
+  }
 
-  return JSON.stringify({ x, y, val });
-  // if nothing has changed, return {val, x, y}
+  // this is a low point
+  return { x, y, val };
 };
 
 export const partOne = (input: string[]): number => {
-  const map = input.map((line) => line.split("").map((num) => parseInt(num)));
-  const lowPoints = new Set();
-  //   console.log(map);
+  // make a 2D array cave system
+  const map: Point[][] = input.map((line) =>
+    line.split("").map((num) => {
+      // add one to value for risk level
+      return { riskLevel: parseInt(num) + 1, visited: false };
+    })
+  );
+
+  const lowPoints = [];
+
   for (let y = 0; y < map.length; y++) {
-    // map[x];
     for (let x = 0; x < map[y].length; x++) {
-      //   const val = map[y][x];
-      //   console.log({ x, y, val });
       const lowestPoint = findLowestFromPoint(x, y, map);
       if (lowestPoint) {
-        lowPoints.add(lowestPoint);
+        lowPoints.push(lowestPoint);
       }
     }
   }
-  console.log(lowPoints);
 
-  // map +1 and reduce to sum
-  return (Array.from(lowPoints) as string[])
-    .map((stringyObj) => ++JSON.parse(stringyObj).val)
-    .reduce((a, b) => a + b, 0);
+  return lowPoints.map((lowPoint) => lowPoint.val).reduce((a, b) => a + b, 0);
 };
-
-console.log(partOne(inputToArray("9.test.txt")));
