@@ -1,11 +1,11 @@
-import { inputToArray } from "./utils";
-
+// remove all matching pairs, recursively
 const removePairs = (line: string): string => {
   const replaced = line.replace(/\(\)|\[]|{}|<>/, "");
   if (line.length === replaced.length) return line;
   return removePairs(replaced);
 };
 
+// give a score to the first illegal character found
 const scoreIllegal = (line: string): number | null => {
   const chars = line.split("");
   for (const char of chars) {
@@ -23,9 +23,11 @@ const scoreIllegal = (line: string): number | null => {
   return 0;
 };
 
-const inverseChars = (line: string): string => {
+// return mirrored brackets
+const getCompletionArray = (line: string): string[] => {
   return line
     .split("")
+    .reverse()
     .map((char) => {
       switch (char) {
         case "(":
@@ -37,12 +39,12 @@ const inverseChars = (line: string): string => {
         case "<":
           return ">";
       }
-    })
-    .join("");
+    });
 };
 
-const scoreInversed = (line: string) => {
-  return line.split("").reduce((acc, char) => {
+// for each character, multiply the total score by 5 and then increase the total score by the point value
+const scoreCompletionArray = (line: string[]) => {
+  return line.reduce((acc, char) => {
     switch (char) {
       case ")":
         return acc * 5 + 1;
@@ -67,18 +69,22 @@ export const partOne = (input: string[]): number => {
 export const partTwo = (input: string[]): number => {
   const sortedScores = input
     .map((line) => {
+      // remove pairs
       const pairsRemoved = removePairs(line);
+      // 0 if valid, but incomplete
       const illegalScore = scoreIllegal(pairsRemoved);
       if (!illegalScore) {
-        const reversed = pairsRemoved.split("").reverse().join("");
-        const inversed = inverseChars(reversed);
-        const score = scoreInversed(inversed);
+        // mirrored brackets to complete the line
+        const completionArray = getCompletionArray(pairsRemoved);
+        // score the completion
+        const score = scoreCompletionArray(completionArray);
         return score;
       }
     })
+    // sort only lines that are valid but incomplete
     .filter((score) => score)
     .sort((a, b) => a - b);
 
+  // return the middle score
   return sortedScores[Math.floor(sortedScores.length / 2)];
 };
-console.log(partTwo(inputToArray("10.txt")));
