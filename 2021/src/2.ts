@@ -32,10 +32,8 @@ export const partTwo = (array: string[]): number => {
   let y = 0;
   let aim = 0;
   for (const instruction of array) {
-    const lineArr = instruction.split(" ");
-    const direction = lineArr[0];
-    const value = parseInt(lineArr[1]);
-    // console.log(direction, value);
+    const [direction, valueString] = instruction.split(" ");
+    const value = parseInt(valueString);
     switch (direction) {
       case "forward":
         x += value;
