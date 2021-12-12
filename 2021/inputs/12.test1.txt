@@ -5,3 +5,16 @@ A-b
 b-d
 A-end
 b-end
+
+// ANSWER
+start,A,b,A,c,A,b,A,end
+start,A,b,A,c,A,b,end
+start,A,c,A,b,A,b,A,end
+start,A,c,A,b,A,b,end
+start,A,c,A,b,A,c,A,end
+start,A,c,A,b,d,b,A,end
+start,A,c,A,b,d,b,end
+start,b,A,c,A,b,A,end
+start,b,A,c,A,b,end
+
+// MINE

@@ -30,20 +30,23 @@ const getPossibiliKey = (input: string[]) => {
 const explore = (
   possibiliKey: PossibiliKey,
   possibility: string,
-  path: string
+  path: string,
+  duplicateVisitsAllowed: boolean
 ): string[] => {
   const paths = [];
   const nextPossibleCaves = possibiliKey[possibility];
 
   for (let i = 0; i < nextPossibleCaves.length; i++) {
     const nextPossibleCave = nextPossibleCaves[i];
+    const nextPossibleCaveRegex = new RegExp(nextPossibleCave, "g");
+
+    const visitsToCave = (path.match(nextPossibleCaveRegex) || []).length;
 
     if (nextPossibleCave === "end") {
       paths.push(`${path},${nextPossibleCave}`);
+    } else if (nextPossibleCave === "start") {
+      continue;
     } else if (
-      // lowercase and first time here
-      (nextPossibleCave.toLowerCase() === nextPossibleCave &&
-        !path.includes(nextPossibleCave)) ||
       // uppercase
       nextPossibleCave.toLowerCase() !== nextPossibleCave
     ) {
@@ -51,7 +54,37 @@ const explore = (
         ...explore(
           possibiliKey,
           nextPossibleCave,
-          `${path},${nextPossibleCave}`
+          `${path},${nextPossibleCave}`,
+          duplicateVisitsAllowed
+        )
+      );
+    } else if (
+      // lowercase
+      // never been here
+      visitsToCave === 0
+    ) {
+      paths.push(
+        ...explore(
+          possibiliKey,
+          nextPossibleCave,
+          `${path},${nextPossibleCave}`,
+          duplicateVisitsAllowed
+        )
+      );
+    } else if (
+      // lowercase
+      // been here once
+      // haven't visited any other small cave twice
+      visitsToCave === 1 &&
+      duplicateVisitsAllowed
+    ) {
+      paths.push(
+        ...explore(
+          possibiliKey,
+          nextPossibleCave,
+          `${path},${nextPossibleCave}`,
+          // don't visit any other small cave twice anymore
+          false
         )
       );
     }
@@ -59,13 +92,23 @@ const explore = (
   return paths;
 };
 
-export const partOne = (input: string[]): number => {
+export const main = (
+  input: string[],
+  duplicateVisitsAllowed = false
+): number => {
   const possibiliKey = getPossibiliKey(input);
 
   const paths: string[] = [];
 
   possibiliKey.start.forEach((possibility) => {
-    paths.push(...explore(possibiliKey, possibility, `start,${possibility}`));
+    paths.push(
+      ...explore(
+        possibiliKey,
+        possibility,
+        `start,${possibility}`,
+        duplicateVisitsAllowed
+      )
+    );
   });
 
   return paths.length;
