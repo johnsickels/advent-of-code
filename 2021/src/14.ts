@@ -38,7 +38,7 @@ const getInitialPairs = (polymerTemplate: string): Counter => {
 
   for (let i = 0; i < polymerTemplate.length - 1; i++) {
     const currentPair = polymerTemplate[i] + polymerTemplate[i + 1];
-    pairs[currentPair] = pairs[currentPair] ? ++pairs[currentPair] : 1;
+    pairs[currentPair] = (pairs[currentPair] ?? 0) + 1;
   }
 
   return pairs;
@@ -55,9 +55,7 @@ const step = (rules: PairInsertionRules, oldPairs: Counter): Counter => {
   const newPairs: Counter = {};
   Object.entries(oldPairs).forEach(([pair, frequency]) => {
     rules[pair].forEach((newPair) => {
-      newPairs[newPair] = newPairs[newPair]
-        ? newPairs[newPair] + frequency
-        : frequency;
+      newPairs[newPair] = (newPairs[newPair] ?? 0) + frequency;
     });
   });
   return newPairs;
@@ -73,10 +71,8 @@ const getElementCount = (pairs: Counter): Counter => {
 
   Object.entries(pairs).forEach(([pair, frequency]) => {
     pair.split("").forEach((el) => {
-      // divide  by 2 because we count each pair once, and therefore character twice
-      elCounter[el] = elCounter[el]
-        ? elCounter[el] + frequency / 2
-        : frequency / 2;
+      // divide by 2 because we count each pair once, and therefore character twice
+      elCounter[el] = (elCounter[el] ?? 0) + frequency / 2;
     });
   });
 
