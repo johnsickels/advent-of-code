@@ -8,7 +8,7 @@ def main(current_frequency, frequencies):
         current_frequency += int(x)
         if current_frequency in frequencies:
             print(current_frequency)
-            return current_frequency
+            return
         frequencies.add(current_frequency)
 
     main(current_frequency, frequencies)
