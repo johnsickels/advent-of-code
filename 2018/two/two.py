@@ -5,23 +5,26 @@ box_ids = open("input.txt")
 
 def compare(str1, str2):
     flukes = 0
-    for i, char in enumerate(str1):
-        if char != str2[i]:
+    matching = ''
 
+    for i, char in enumerate(str1):
+
+        if char == str2[i]:
+            matching += char
+        else:
             flukes += 1
             if flukes > 1:
                 return
 
-    print('ONLY 1 FLUKE!')
-    print(str1, str2)
-    # gotta run, visual inspection here
-    # TODO: cut out the nonmatchin char and return the rest of the ID
+    return matching
 
 
 def main():
 
     for a, b in itertools.combinations(box_ids, 2):
-        compare(a, b)
+        match = compare(a, b)
+        if match:
+            return match
 
 
 print(main())
