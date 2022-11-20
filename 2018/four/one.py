@@ -40,26 +40,43 @@ for log in f:
             sleep_dict[current_guard_id] = {}
 
         for min in range(fell_asleep_at, wakes_up_at):
-            sleep_dict[current_guard_id]['total_minutes_asleep'] = sleep_dict[current_guard_id].get(
-                'total_minutes_asleep', 0) + 1
+            # PART ONE
+            # sleep_dict[current_guard_id]['total_minutes_asleep'] = sleep_dict[current_guard_id].get(
+            #     'total_minutes_asleep', 0) + 1
 
             if min in sleep_dict[current_guard_id]:
                 sleep_dict[current_guard_id][min] += 1
 
             else:
                 sleep_dict[current_guard_id][min] = 1
-        # sleep_dict[current_guard_id]
 
 print(sleep_dict)
 
-sleepiest_id, sleepiest_dict = sorted(sleep_dict.items(),
-                                      key=lambda x: x[1]['total_minutes_asleep'])[-1]
+###########
+# PART ONE
+###########
+# sleepiest_id, sleepiest_dict = sorted(sleep_dict.items(),
+#                                       key=lambda x: x[1]['total_minutes_asleep'])[-1]
 
-del sleepiest_dict['total_minutes_asleep']
+# del sleepiest_dict['total_minutes_asleep']
 
-most_frequent_minute_asleep = max(sleepiest_dict, key=sleepiest_dict.get)
+# most_frequent_minute_asleep = max(sleepiest_dict, key=sleepiest_dict.get)
 
-print(sleepiest_dict)
-print(sleepiest_id)
-print(most_frequent_minute_asleep)
-print(sleepiest_id * most_frequent_minute_asleep)
+# print(sleepiest_id * most_frequent_minute_asleep)
+
+
+###########
+# PART TWO
+###########
+# print(max(dict["City"].items(), key=lambda x: x[1]['n_trips'])[0])
+# print(max(sleep_dict.items(), key=lambda x: x[1]['n_trips'])[0])
+max_amount = 0
+sleepiest_guard = None
+sleepiest_minute = None
+for gaurd_id, minute_dict in sleep_dict.items():
+    for minute, amount in minute_dict.items():
+        if amount > max_amount:
+            max_amount = amount
+            sleepiest_guard = gaurd_id
+            sleepiest_minute = minute
+print(sleepiest_guard * sleepiest_minute)
