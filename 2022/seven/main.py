@@ -5,7 +5,6 @@ root = {}
 cwd = root
 pwd = ''
 all_paths = set()
-total = 0
 
 
 def findTotal(dct):
@@ -57,10 +56,28 @@ for line in lines:
         size, fileName = line.split(' ')
         cwd[fileName] = int(size)
 
+# part one
+total = 0
 
 for path in all_paths:
     dir_size = findTotal(eval(f'root{path}'))
     if dir_size <= 100000:
         total += dir_size
-
 print(total)
+
+# part two
+total_space = 70000000
+used_space = findTotal(root)
+available_space = total_space - used_space
+needed_space = 30000000
+space_to_free = needed_space - available_space
+options = list()
+
+for path in all_paths:
+    dir_size = findTotal(eval(f'root{path}'))
+    if dir_size >= space_to_free:
+        options.append(dir_size)
+
+options.sort()
+
+print(options[0])
