@@ -7,7 +7,8 @@
     "build": "concurrently \"npm:build-*\"",
     "build-2020": "cd 2020 && tsc",
     "build-2021": "cd 2021 && tsc",
-    "watch": "cd 2021 && tsc --watch",
+    "build-2023": "cd 2023 && tsc",
+    "watch": "cd 2023 && tsc --watch",
     "test": "jest --coverage",
     "lint": "eslint . --ext .ts"
   },
